@@ -1,0 +1,24 @@
+{
+  "name": "chess",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "build": "cd client && npm build",
+    "dev": "nodemon index.js --ignore client"
+  },
+  "keywords": [],
+  "author": "Ayan Dhara",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-ws": "^5.0.2",
+    "sha256": "^0.2.0",
+    "ws": "^7.5.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
