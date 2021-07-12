@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "build": "cd client && npm build",
+    "build": "cd client && npm install && npm run build",
     "dev": "nodemon index.js --ignore client"
   },
   "keywords": [],
@@ -20,5 +20,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
+  },
+  "engines": {
+    "node": ">=15.0.0",
+    "npm": ">=6.0.0"
   }
 }

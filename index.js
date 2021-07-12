@@ -17,4 +17,4 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(path.resolve(), 'client/build/index.html'));
 });
 
-app.listen(5000, () => console.log("Server Started"));
+app.listen(process.env.PORT || 5000, () => console.log("Server Started"));
