@@ -1,0 +1,70 @@
+.playGround {
+    --height: 1vh;
+    height: calc(100*var(--height));
+    width: calc(100*var(--height));
+    background: #75D5Fd;
+    position: relative;
+    filter: contrast(-2);
+    .chessBoard {
+        position: absolute;
+        top: calc(3*var(--height));
+        left: calc(3*var(--height));
+        height: 94%;
+        width: 94%;
+        display: grid;
+        grid-template-rows: repeat(8, auto);
+        grid-gap: calc(var(--height)/2);
+        .row {
+            display: grid;
+            grid-template-columns: repeat(8, auto);
+            grid-gap: calc(var(--height)/2);
+            .cell {
+                background: var(--body-background);
+            }
+        }
+    }
+    .top, .bottom, .left, .right {
+        position: absolute;
+        display: grid;
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: calc(var(--height)*3);
+            line-height: 100%;
+        }
+    }
+    .top, .bottom {
+        left: 3%;
+        right: 3%;
+        height: 3%;
+        grid-template-columns: repeat(8,auto);
+    }
+    .top {
+        top: 0;
+    }
+    .bottom {
+        bottom: 0;
+    }
+
+    .left, .right {
+        top: 3%;
+        bottom: 3%;
+        width: 3%;
+        grid-template-rows: repeat(8,auto);
+    }
+    .left {
+        left: 0;
+    }
+    .right {
+        right: 0;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .playGround {
+        --height: 1vw;
+        height: calc(100 * var(--height));
+        width: calc(100 * var(--height));
+    }
+}

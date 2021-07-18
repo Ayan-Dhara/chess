@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "build": "cd client && npm install && npm run build",
     "dev": "nodemon index.js --ignore client"
   },
   "keywords": [],

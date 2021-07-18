@@ -1,4 +1,5 @@
-import './styles/App.scss';
+"use strict"
+import './styles/App.scss'
 
 import Room from './pages/Room';
 import Home from './pages/Home';
@@ -15,12 +16,14 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/room/*" component={Room} exact />
-          <Route path="/room" component={Home} exact />
-          <Route component={NotFoundPage} />
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route path="/" component={Home} exact />
+            <Route path="/room/*" component={Room} exact />
+            <Route path="/room" component={Home} exact />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </div>
       </Router>
     );
   }

@@ -1,0 +1,22 @@
+.background {
+    position: fixed;
+    inset: 0;
+    background: rgba(black, 0.1);
+    display: none;
+}
+
+.namePopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: clamp(100px, 30vh, 200px);
+    width: clamp(300px, 70vh, 500px);;
+    background: rgba(3, 161, 173, 0.25);
+    backdrop-filter: blur(calc(0.2vh + 0.2vw));
+    border-radius: calc(0.2vh + 0.2vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: calc(0.3vh + 0.3vw) solid rgba(#75D5Fd, 0.2);
+}
