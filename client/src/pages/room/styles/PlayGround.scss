@@ -1,16 +1,17 @@
-.playGround {
-    --height: 1vh;
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Math&display=swap');
+.play-ground {
+    --height: 1vmin;
     height: calc(100*var(--height));
     width: calc(100*var(--height));
     background: #75D5Fd;
+    color: #75D5Fd;
     position: relative;
-    filter: contrast(-2);
-    .chessBoard {
+    .chess-board {
         position: absolute;
-        top: calc(3*var(--height));
-        left: calc(3*var(--height));
-        height: 94%;
-        width: 94%;
+        top: calc(2*var(--height));
+        left: calc(2*var(--height));
+        height: 96%;
+        width: 96%;
         display: grid;
         grid-template-rows: repeat(8, auto);
         grid-gap: calc(var(--height)/2);
@@ -30,14 +31,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: calc(var(--height)*3);
+            font-size: calc(var(--height)*2);
             line-height: 100%;
         }
     }
     .top, .bottom {
-        left: 3%;
-        right: 3%;
-        height: 3%;
+        left: 2%;
+        right: 2%;
+        height: 2%;
         grid-template-columns: repeat(8,auto);
     }
     .top {
@@ -46,11 +47,10 @@
     .bottom {
         bottom: 0;
     }
-
     .left, .right {
-        top: 3%;
-        bottom: 3%;
-        width: 3%;
+        top: 2%;
+        bottom: 2%;
+        width: 2%;
         grid-template-rows: repeat(8,auto);
     }
     .left {
@@ -59,12 +59,19 @@
     .right {
         right: 0;
     }
-}
-
-@media screen and (orientation: portrait) {
-    .playGround {
-        --height: 1vw;
-        height: calc(100 * var(--height));
-        width: calc(100 * var(--height));
+    .chess-piece {
+        font-family: 'STIX Two Math', serif;
+        //display: none;
+        position: absolute;
+        top: calc((var(--i) * 100.5%  / 8) + 1%);
+        left: calc((var(--j) * 100.5%  / 8) + 1%);
+        //border: 1px solid;
+        height: calc(var(--height)*78/8);
+        width: calc(var(--height)*78/8);
+        font-size: calc(10*var(--height));
+        line-height: calc(10*var(--height));
+        text-align: center;
+        //cursor: grab;
+        cursor: pointer;
     }
 }

@@ -1,7 +1,7 @@
 "use strict"
 import React from 'react';
 
-const NotFoundPage = () => {
+function NotFoundPage(){
   return <h1>404 Page NotFound</h1>;
 }
 

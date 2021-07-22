@@ -1,15 +1,14 @@
 "use strict"
-import {Component} from "react";
 import NamePopUp from "./NamePopUp";
 
-class Home extends Component {
-  render() {
-    return (
-      <>
-        <div>Home</div>
-        <NamePopUp/>
-      </>
-    );
-  }
+import React from 'react';
+
+function Home(props) {
+  return (
+    <>
+      <div>Home</div>
+      <NamePopUp/>
+    </>
+  );
 }
 export default Home;

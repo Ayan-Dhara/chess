@@ -1,19 +1,17 @@
 "use strict"
 
-import React, {Component} from 'react';
+import './styles/NamePopUp.scss'
 
-import styles from './styles/NamePopUp.module.scss'
+import React from 'react';
 
-class NamePopUp extends Component {
-  render() {
-    return (
-      <div className={styles.background}>
-        <div className={styles.namePopup}>
-          Enter Your Name
-        </div>
+function NamePopUp(props) {
+  return (
+    <div className="popupBackground">
+      <div className="namePopup">
+        Enter Your Name
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default NamePopUp;
