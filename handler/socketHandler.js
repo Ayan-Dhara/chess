@@ -12,9 +12,9 @@ const initialBoard = [
   ["P", "P", "P", "P", "P", "P", "P", "P"].map((c,i)=>"W"+c+(i+1)),
   ["RL", "NL", "BL", "Q0", "K0", "BR", "NR", "RR"].map(c=>"W"+c)
 ]
+const rooms = []
 
-export const rooms = []
-export function messageHandler(event){
+function messageHandler(event){
   const socket = event.target
   let data = {}
   try{
@@ -26,7 +26,7 @@ export function messageHandler(event){
     case KEYWORDS.REQUEST:{
       switch (message[KEYWORDS.REQUEST]){
         case KEYWORDS.BOARD:{
-          event.target.send(JSON.stringify({
+          socket.send(JSON.stringify({
             type: KEYWORDS.BOARD,
             board: initialBoard
           }))
@@ -34,5 +34,38 @@ export function messageHandler(event){
       }
       break;
     }
+    case KEYWORDS.MOVE:{
+      const move = message[KEYWORDS.MOVE]
+      const board = [...initialBoard]
+      board[move.to.x][move.to.y] = board[move.from.x][move.from.y]
+      board[move.from.x][move.from.y] = ''
+      socket.send(JSON.stringify({
+        type: KEYWORDS.BOARD,
+        board: board
+      }))
+      break;
+    }
   }
 }
+
+function socketHandler(socket, req){
+  let path = req.params[0]
+  if(! rooms[path]) {
+    let room = {}
+    room.viewers = []
+    room.moves = []
+    room.lastTurn = false
+    room.ownersTurn = true
+    rooms[path] = room
+  }
+  socket.send(JSON.stringify(
+    {
+      type: KEYWORDS.STATUS,
+      status: "connected"
+    }
+  ))
+  socket.path = path
+  socket.addEventListener("message", messageHandler)
+}
+
+export default socketHandler;

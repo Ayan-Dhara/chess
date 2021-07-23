@@ -24,8 +24,6 @@ const pieceMap = {
 
 function ChessPieces(props) {
   const state = React.useContext(Context);
-  state.requestMove(0,0,0,0)
-  console.log(state.pieces);
   return (
     <>
       {
@@ -35,7 +33,13 @@ function ChessPieces(props) {
               arr.map((piece, j)=>{
                 if(!piece)
                   return ""
-                return <div key={piece} style={{'--i':i, '--j':j}} className="chess-piece">
+                return <div key={piece}
+                  style={{'--i':i, '--j':j}}
+                  data-i={i} data-j={j}
+                  data-piece={piece}
+                  className="chess-piece"
+                  onClick={state.pieceClick}
+                >
                   {
                     String.fromCharCode(9800 + pieceMap[`${piece[0]}${piece[1]}`])
                   }
