@@ -6,6 +6,7 @@
     background: #75D5Fd;
     color: #75D5Fd;
     position: relative;
+    //transition: all 1s;
     .chess-board {
         position: absolute;
         top: calc(2*var(--height));
@@ -94,6 +95,7 @@
         cursor: pointer;
         color: #75D5Fd;
         text-shadow: 0 0 calc(var(--height)*2);
+        transition: left 0.5s ease-in-out, top 0.5s ease-in-out;
         &[data-piece*="P"]{
             font-size: calc(7*var(--height));
         }

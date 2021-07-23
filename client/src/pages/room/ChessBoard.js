@@ -1,29 +1,24 @@
 "use strict"
 import React from 'react';
-import ChessPieces from "./ChessPieces";
-import Context from "./context/RoomContext";
 
-function ChessRow (){
-  return (
-    <div className="row">
-      {[...Array(8)].map((a, i) => <div className="cell" key={i}/>)}
-    </div>
-  );
-}
+import ChessPieces from "./ChessPieces";
+
+import {register, currentBoardCells} from './context/BoardCells.js'
+import {onClickCell} from './context/RoomContext.js'
 
 function ChessBoard(props) {
-  const state = React.useContext(Context);
-  const boardCells = state.boardCells
+  const [state, setState] = React.useState(currentBoardCells);
+  register(setState)
   return (
     <div className="chess-board cell">
       {
-        boardCells.map((a, i) => {
+        state.map((a, i) => {
           return <div key={i} className="row">
             {
               a.map((e,j)=>{
                 if(e)
-                  return <div key={j} className={`cell ${e}`} />
-                return <div key={j} className="cell"/>
+                  return <div key={j} className={`cell ${e}`} onClick={()=>onClickCell(i,j)}/>
+                return <div key={j} className="cell" onClick={()=>onClickCell(i,j)}/>
               })
             }
           </div>

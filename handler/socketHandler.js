@@ -14,6 +14,29 @@ const initialBoard = [
 ]
 const rooms = []
 
+const copyObject = (obj)=>{
+  try{
+    const newObj = {...obj}
+    for(let key in newObj){
+      newObj[key] = copyObject(newObj[key])
+    }
+    return newObj
+  }catch(e){}
+  return obj
+}
+const copyArray = (arr, level)=>{
+  if(level<1)
+    return arr
+  try{
+    const newArr = [...arr]
+    for(let i in newArr){
+      newArr[i] = copyArray(newArr[i], level-1)
+    }
+    return newArr
+  }catch(e){}
+  return arr
+}
+
 function messageHandler(event){
   const socket = event.target
   let data = {}
@@ -36,7 +59,7 @@ function messageHandler(event){
     }
     case KEYWORDS.MOVE:{
       const move = message[KEYWORDS.MOVE]
-      const board = [...initialBoard]
+      const board = [...initialBoard]// copyArray(initialBoard, 2)
       board[move.to.x][move.to.y] = board[move.from.x][move.from.y]
       board[move.from.x][move.from.y] = ''
       socket.send(JSON.stringify({

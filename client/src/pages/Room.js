@@ -7,10 +7,10 @@ import {RoomContext} from "./room/context/RoomContext";
 
 function Room(props) {
   return (
-    <RoomContext>
+    <>
       <PlayGround/>
       <NamePopUp/>
-    </RoomContext>
+    </>
   );
 }
 export default Room;
