@@ -6,11 +6,11 @@ import ChessPieces from "./ChessPieces";
 import {register, currentBoardCells} from './context/BoardCells.js'
 import {onClickCell} from './context/RoomContext.js'
 
-function ChessBoard(props) {
+function ChessBoardCells(){
   const [state, setState] = React.useState(currentBoardCells);
   register(setState)
   return (
-    <div className="chess-board cell">
+    <>
       {
         state.map((a, i) => {
           return <div key={i} className="row">
@@ -24,6 +24,14 @@ function ChessBoard(props) {
           </div>
         })
       }
+    </>
+  );
+}
+
+function ChessBoard(props) {
+  return (
+    <div className="chess-board cell">
+      <ChessBoardCells/>
       <ChessPieces/>
     </div>
   );

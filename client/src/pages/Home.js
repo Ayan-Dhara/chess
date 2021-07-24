@@ -1,5 +1,5 @@
 "use strict"
-import NamePopUp from "./NamePopUp";
+import NamePopUp from "./home/NamePopUp";
 
 import React from 'react';
 

@@ -1,9 +1,10 @@
 "use strict"
 
-import {change as changeBoardPieces, currentBoardPieces} from './BoardPieces'
-import {change as changeBoardCells, currentBoardCells} from "./BoardCells";
+import {change as changeBoardPieces, currentBoardPieces} from './BoardPieces.js'
+import {change as changeBoardCells, currentBoardCells} from "./BoardCells.js";
+import {change as changeNamePopup} from "./NamePopUp.js";
 
-import {KEYWORDS} from "../../../KeyWords";
+import {KEYWORDS} from "../../../KeyWords.js";
 
 const LOCAL_PORT = 5000
 const socket = new WebSocket(`${window.location.protocol.replace("http", "ws")}//${window.location.hostname}:${(window.location.hostname==="localhost"||window.location.hostname.toString().startsWith("127.0.0"))?LOCAL_PORT:window.location.port}/ws${window.location.pathname}`)
@@ -13,10 +14,12 @@ const socket = new WebSocket(`${window.location.protocol.replace("http", "ws")}/
 let boardReady = false;
 export function setBoardReady(status){boardReady = status}
 const requestInitialBoard = () => {
-  const userName = localStorage.getItem("username")
+  const userName = localStorage.getItem("userName")
+  const userID = localStorage.getItem("userID")
   if (!userName){
     // show name input popup
-    // return
+    changeNamePopup(true)
+    return
   }
   if (!boardReady){
     setTimeout(()=>{
@@ -25,14 +28,21 @@ const requestInitialBoard = () => {
     return
   }
   socket.send(JSON.stringify({
-    type: KEYWORDS.REQUEST,
-    request: KEYWORDS.BOARD
+    type: KEYWORDS.CONNECT,
+    userName,
+    userID
   }))
 }
 socket.addEventListener("open", ()=>{
-  requestInitialBoard()
+  setTimeout(()=>{
+    requestInitialBoard()
+  }, 100)
 })
 
+let userRole = null
+export function getUserRole(){
+  return userRole
+}
 
 // handle incoming message
 socket.addEventListener("message", (event) =>{
@@ -44,16 +54,44 @@ socket.addEventListener("message", (event) =>{
 })
 const handleMessage = (message)=>{
   switch (message.type){
-    case KEYWORDS.MOVE: {
-      console.log("MOVE", message.move)
+    case KEYWORDS.PING: {
       break
     }
     case KEYWORDS.STATUS: {
-      console.log("STATUS", message.status)
+      switch(message.status){
+        case KEYWORDS.NO_NAME: {
+          window.location.reload()
+          break
+        }
+        case KEYWORDS.CLOSED: {
+          socket.close()
+          alert("Socket is closed")
+          break
+        }
+        default: {
+          console.log("STATUS", message.status)
+        }
+      }
       break
     }
     case KEYWORDS.BOARD: {
       changeBoardPieces(message[KEYWORDS.BOARD])
+      // console.table(message[KEYWORDS.BOARD])
+      break
+    }
+    case KEYWORDS.USERS: {
+      // set users list
+      break
+    }
+    case KEYWORDS.INITIATE: {
+      userRole = message[KEYWORDS.ROLE]
+      changeBoardPieces(message[KEYWORDS.BOARD])
+      break
+    }
+    case KEYWORDS.CREATE_ID: {
+      const userID = message.userID
+      localStorage.setItem("userID", userID)
+      window.location.reload()
       break
     }
     default:{
@@ -182,7 +220,7 @@ export const onClickPiece = (event) => {
             let y = j + dy
             if(x > -1 && y > -1 && x < 8 && y < 8){
               if(haveSameSidePiece(type, x, y)){
-                break
+                continue
               }
               if(haveOtherSidePiece(type, x, y)){
                 boardCells[x][y] = "red"
@@ -195,25 +233,6 @@ export const onClickPiece = (event) => {
             }
           }
           // castling
-          if(!castlingUsed && !kingMoved){
-            for (let [dx, dy] of moves){
-              let x = i + dx
-              let y = j + dy
-              if(x > -1 && y > -1 && x < 8 && y < 8){
-                if(haveSameSidePiece(type, x, y)){
-                  break
-                }
-                if(haveOtherSidePiece(type, x, y)){
-                  boardCells[x][y] = "red"
-                }
-                else{
-                  boardCells[x][y] = "green"
-                  x = x + dx
-                  y = y + dy
-                }
-              }
-            }
-          }
           break
         }
         case "P": {
@@ -224,10 +243,10 @@ export const onClickPiece = (event) => {
               let y = j + dy
               if(x > -1 && y > -1 && x < 8 && y < 8){
                 if(haveSameSidePiece(type, x, y)){
-                  break
+                  continue
                 }
                 if(haveOtherSidePiece(type, x, y)){
-                  break
+                  continue
                 }
                 boardCells[x][y] = "green"
               }
@@ -240,10 +259,10 @@ export const onClickPiece = (event) => {
               let y = j + dy
               if(x > -1 && y > -1 && x < 8 && y < 8){
                 if(haveSameSidePiece(type, x, y)){
-                  break
+                  continue
                 }
                 if(haveOtherSidePiece(type, x, y)){
-                  break
+                  continue
                 }
                 boardCells[x][y] = "green"
               }

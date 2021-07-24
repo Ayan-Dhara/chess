@@ -1,15 +1,19 @@
 "use strict"
 import PlayGround from "./room/PlayGround";
-import NamePopUp from "./NamePopUp";
+import NamePopUp from "./room/NamePopUp";
+import {namePopUpNeeded, register} from "./room/context/NamePopUp";
 
-import React from 'react';
-import {RoomContext} from "./room/context/RoomContext";
+import React, {useState} from 'react';
 
-function Room(props) {
+function Room() {
+  const [namePopUp, setNamePopUp] = useState(namePopUpNeeded)
+  register(setNamePopUp)
   return (
     <>
       <PlayGround/>
-      <NamePopUp/>
+      {
+        namePopUp? <NamePopUp/>:""
+      }
     </>
   );
 }

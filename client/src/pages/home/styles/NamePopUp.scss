@@ -1,0 +1,57 @@
+.popupBackground {
+    position: fixed;
+    inset: 0;
+    background: rgba(black, 0.1);
+    --shadow: calc(0.5vmin + 0.5vmax);
+    .namePopup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: calc(2vmin + 1vmax);
+        background: rgba(11, 43, 61, 0.42);
+        backdrop-filter: blur(calc(0.2vmin + 0.3vmax));
+        border-radius: calc(0.2vh + 0.2vw);
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        border: calc(0.3vh + 0.3vw) solid rgba(#75D5Fd, 0.9);
+        box-shadow: 0 0 var(--shadow) var(--text-color), inset 0 0 var(--shadow) var(--text-color);
+        .heading{
+            color: var(--text-color);
+            font-size: calc(3vmin + 2vmax);
+            text-shadow: 0 0 var(--shadow) var(--text-color);
+        }
+        input {
+            color: var(--text-color);
+            font-size: calc(3vmin + 2vmax);
+            background: transparent;
+            border: none;
+            text-align: center;
+            margin: calc(1vmax + 1vmin);
+            border-bottom: 0.5vmin solid;
+            width: calc(30vmin + 20vmax);
+            text-shadow: 0 0 var(--shadow) var(--text-color);
+            &::placeholder{
+                color: rgba(#75D5FDFF, 0.3);
+                text-shadow: none;
+            }
+        }
+        button {
+            font-size: calc(2vmin + 1.5vmax);
+            color: var(--text-color);
+            border: calc(0.2vmax + 0.1vmax) solid #0982aa;
+            text-align: center;
+            padding: calc(0.5vmin + 0.5vmax) calc(1vmin + 0.5vmax);
+            background: var(--body-background);
+            border-radius: calc(1vmin + 0.5vmax);
+            box-shadow: calc(var(--shadow)/3) calc(var(--shadow)/2) var(--shadow);
+            cursor: pointer;
+            text-shadow: 0 0 calc(var(--shadow)/5);
+        }
+        button:active {
+            box-shadow: 0 0 var(--shadow);
+         }
+    }
+}

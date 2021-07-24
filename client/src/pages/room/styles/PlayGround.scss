@@ -3,8 +3,8 @@
     --height: 1vmin;
     height: calc(100*var(--height));
     width: calc(100*var(--height));
-    background: #75D5Fd;
-    color: #75D5Fd;
+    background: var(--text-color);
+    color: var(--text-color);
     position: relative;
     //transition: all 1s;
     .chess-board {
@@ -103,7 +103,7 @@
         text-align: center;
         //cursor: grab;
         cursor: pointer;
-        color: #75D5Fd;
+        color: var(--text-color);
         text-shadow: 0 0 calc(var(--height)*2);
         transition: left 0.5s ease-in-out, top 0.5s ease-in-out;
         &[data-piece*="P"]{
@@ -112,5 +112,8 @@
         &.selected, &:hover {
             color: #00baff;
         }
+    }
+    .read-only {
+        pointer-events: none;
     }
 }
