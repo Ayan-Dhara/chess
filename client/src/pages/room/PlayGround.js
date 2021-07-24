@@ -36,7 +36,7 @@ function BoardSide(){
   );
 }
 
-function PlayGround(props) {
+function PlayGround() {
   return (
     <div className="play-ground">
       <ChessBoard/>
