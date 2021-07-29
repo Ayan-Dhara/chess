@@ -9,7 +9,6 @@ import {KEYWORDS} from "../../../KeyWords.js";
 const LOCAL_PORT = 5000
 const socket = new WebSocket(`${window.location.protocol.replace("http", "ws")}//${window.location.hostname}:${(window.location.hostname==="localhost"||window.location.hostname.toString().startsWith("127.0.0"))?LOCAL_PORT:window.location.port}/ws${window.location.pathname}`)
 
-
 // initiate communication
 let boardReady = false;
 export function setBoardReady(status){boardReady = status}
@@ -243,10 +242,10 @@ export const onClickPiece = (event) => {
               let y = j + dy
               if(x > -1 && y > -1 && x < 8 && y < 8){
                 if(haveSameSidePiece(type, x, y)){
-                  continue
+                  break
                 }
                 if(haveOtherSidePiece(type, x, y)){
-                  continue
+                  break
                 }
                 boardCells[x][y] = "green"
               }

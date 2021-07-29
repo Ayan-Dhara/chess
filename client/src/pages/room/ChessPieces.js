@@ -8,6 +8,7 @@ import {KEYWORDS} from "../../KeyWords";
 
 const pieceMap = {
   BR:14, BN:16, BB:15, BQ:13, BK:12, BP:17,
+  // BR:20, BN:22, BB:21, BQ:19, BK:18, BP:23,
   WR:20, WN:22, WB:21, WQ:19, WK:18, WP:23
 }
 

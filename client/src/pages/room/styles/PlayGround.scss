@@ -98,16 +98,23 @@
         //border: 1px solid red;
         height: calc(var(--height)*93/8);
         width: calc(var(--height)*93/8);
-        font-size: calc(9*var(--height));
+        font-size: calc(8*var(--height));
         line-height: calc(var(--height)*93/8);
         text-align: center;
         //cursor: grab;
         cursor: pointer;
         color: var(--text-color);
-        text-shadow: 0 0 calc(var(--height)*2);
+        text-shadow: 0 0 calc(var(--height)*2) var(--text-color);
         transition: left 0.5s ease-in-out, top 0.5s ease-in-out;
         &[data-piece*="P"]{
-            font-size: calc(7*var(--height));
+            font-size: calc(6*var(--height));
+        }
+        &[data-piece^="B"]{
+            //color: red;
+            font-weight: 10;
+            //text-fill: linear-gradient(blue, lime);
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 0, 0 0 calc(var(--height)*1)  ;
         }
         &.selected, &:hover {
             color: #00baff;

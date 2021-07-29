@@ -95,11 +95,18 @@ const pieceMoves = {
     type: 3
   }
 }
+
 const validMove = (board, move, moveByOwner)=>{
   const i = move.from.x * 1
   const j = move.from.y * 1
   const type = board[i][j]
   if(!type[1])
+    return false
+  if(moveByOwner){
+    if( type[0] === 'B')
+      return false
+  }
+  else if (type[0] === 'W')
     return false
   const moves = pieceMoves[type[1]].move
   switch (pieceMoves[type[1]].type){
@@ -172,10 +179,10 @@ const validMove = (board, move, moveByOwner)=>{
               let y = j + dy
               if(x > -1 && y > -1 && x < 8 && y < 8){
                 if(haveSameSidePiece(board, type, x, y)){
-                  continue
+                  break
                 }
                 if(haveOtherSidePiece(board, type, x, y)){
-                  continue
+                  break
                 }
                 if(x === move.to.x && y === move.to.y)
                   return true
@@ -204,9 +211,7 @@ const validMove = (board, move, moveByOwner)=>{
             let x = i + dx
             let y = j + dy
             if (x > -1 && y > -1 && x < 8 && y < 8) {
-              console.log(move, x, y)
               if (haveOtherSidePiece(board, type, x, y)) {
-                console.log(x, y)
                 if(x === move.to.x && y === move.to.y)
                   return true
                 else{
@@ -279,7 +284,7 @@ function messageHandler(event){
       if (moveByOwner === room.lastTurn)
         return
 
-      // turn verified
+      // try to move
       const move = message[KEYWORDS.MOVE]
       const board = room.board
       if(validMove((socket === room.opponent)?rotateBoard180deg(board):board, move, moveByOwner)){
@@ -304,9 +309,6 @@ function messageHandler(event){
         for(let viewer of room.viewers){
           viewer?.send(data)
         }
-      }
-      else {
-        console.log("invalid move")
       }
       break;
     }
@@ -400,7 +402,6 @@ export default socketHandler;
 setInterval(()=>{
   for(let path in rooms){
     let room = rooms[path]
-    // console.log(room)
     room?.owner?.send(JSON.stringify({
       type: KEYWORDS.PING
     }))

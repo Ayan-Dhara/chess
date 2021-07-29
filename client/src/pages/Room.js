@@ -16,10 +16,7 @@ function Room() {
     <>
       <PlayGround/>
       {
-        namePopUp? <NamePopUp/>:""
-      }
-      {
-        linkPopUp? <LinkPopUp/>:""
+        namePopUp? <NamePopUp/>:linkPopUp? <LinkPopUp/>:""
       }
     </>
   );
