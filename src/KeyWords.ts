@@ -1,0 +1,23 @@
+export const KEYWORDS = {
+  MESSAGE: "message",
+  TYPE: "type",
+  MOVE: "move",
+  STATUS: "status",
+  REQUEST: "request",
+  BOARD: "board",
+  PIECES: "pieces",
+  ACTION: "action",
+  RELOAD: "reload",
+  CONNECT: "connect",
+  CREATE_ID: "create_id",
+  NO_NAME: "no_name",
+  INITIATE: "initiate",
+  OPPONENT: "opponent",
+  OWNER: "owner",
+  VIEWER: "viewer",
+  CLOSED: "closed",
+  USERS: "users",
+  ROLE: "role",
+  PING: "ping",
+  ERROR: "error"
+}
