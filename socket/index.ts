@@ -1,6 +1,7 @@
 import {KEYWORDS} from "../src/KeyWords";
 import sha256 from "sha256";
 import WebSocket from "ws"
+import {Request} from "express";
 
 export interface User {
   socket: WebSocket
@@ -41,6 +42,8 @@ const initialBoard: Board = [
   ["RL", "NL", "BL", "Q0", "K0", "BR", "NR", "RR"].map(c => "W" + c)
 ]
 const rooms: { [room_id: string]: Room } = {}
+
+const socketPaths = new Map<WebSocket, string>()
 
 const rotateBoard180deg = (board: Board) => {
   const newBoard: Board = []
@@ -306,7 +309,7 @@ function messageHandler(event: WebSocket.MessageEvent) {
 
   switch (message.type) {
     case KEYWORDS.MOVE: {
-      const room = rooms[event.target.url]
+      const room = rooms[socketPaths.get(event.target) || "<default>"]
       if (room.owner?.socket !== socket && room.opponent?.socket !== socket)
         return;
 
@@ -360,7 +363,7 @@ function messageHandler(event: WebSocket.MessageEvent) {
         }))
         break;
       }
-      const room = rooms[socket.url]
+      const room = rooms[socketPaths.get(socket) || "<default>"]
 
       if (!room.owner) {
         room.owner = {
@@ -406,10 +409,11 @@ function messageHandler(event: WebSocket.MessageEvent) {
   }
 }
 
-function index(socket: WebSocket) {
-  // let path = req.params[0]
-  if (!rooms[socket.url]) {
-    rooms[socket.url] = {
+function index(socket: WebSocket, req: Request) {
+  let path = req.params[0]
+  socketPaths.set(socket, path)
+  if (!rooms[path]) {
+    rooms[path] = {
       board: copyArray(initialBoard, 2),
       lastTurn: false,
       viewers: []

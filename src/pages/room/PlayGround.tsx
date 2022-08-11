@@ -1,4 +1,3 @@
-"use strict"
 import "./styles/PlayGround.scss"
 import ChessBoard from "./ChessBoard";
 import {useEffect, useState} from "react";

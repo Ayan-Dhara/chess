@@ -10,7 +10,7 @@ const app = Express();
 const socketApp = ExpressWS(app).app
 
 socketApp.ws('*', function (socket, req) {
-  socketHandler(socket)
+  socketHandler(socket, req)
 })
 
 socketApp.use(Express.static('build'));

@@ -1,5 +1,3 @@
-"use strict"
-
 import {change as changeBoardPieces, currentBoardPieces} from './BoardPieces'
 import {change as changeBoardCells, currentBoardCells} from "./BoardCells";
 import {change as changeNamePopup} from "./NamePopUp";

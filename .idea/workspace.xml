@@ -2,45 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8415e34f-1314-4d77-9f6f-63ba398ba95d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/asset-manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/static/css/main.b75fcb3b.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/static/js/2.a3eaba0f.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/static/js/2.a3eaba0f.chunk.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/static/js/main.1495f2da.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/build/static/js/runtime-main.d8019f7f.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/KeyWords.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/404Page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Room.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/home/NamePopUp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/home/styles/NamePopUp.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/ChessBoard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/ChessPieces.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/LinkPopUp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/NamePopUp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/PlayGround.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/context/BoardCells.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/context/BoardPieces.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/context/LinkPopUp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/context/NamePopUp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/context/RoomContext.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/styles/NamePopUp.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/room/styles/PlayGround.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/styles/App.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/styles/index.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/handler/SocketHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/socket/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socket/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/socket/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/404Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/404Page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home/NamePopUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/NamePopUp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/room/PlayGround.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/room/PlayGround.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/room/context/RoomContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/room/context/RoomContext.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +62,7 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -127,9 +95,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
   </component>
@@ -149,7 +117,8 @@
       <workItem from="1660114919865" duration="8506000" />
       <workItem from="1660144148721" duration="47000" />
       <workItem from="1660144204273" duration="579000" />
-      <workItem from="1660145411448" duration="2028000" />
+      <workItem from="1660145411448" duration="5366000" />
+      <workItem from="1660189872965" duration="1336000" />
     </task>
     <servers />
   </component>

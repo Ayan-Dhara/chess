@@ -1,5 +1,3 @@
-"use strict"
-
 import './styles/NamePopUp.scss'
 
 import React, {useState} from 'react';
