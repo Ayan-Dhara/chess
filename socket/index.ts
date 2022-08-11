@@ -2,6 +2,9 @@ import {KEYWORDS} from "../src/KeyWords";
 import sha256 from "sha256";
 import WebSocket from "ws"
 import {Request} from "express";
+import * as fs from "fs";
+import fsExtra from "fs-extra"
+import nodePath from "path"
 
 export interface User {
   socket: WebSocket
@@ -11,6 +14,7 @@ export interface User {
 }
 
 export interface Room {
+  path: string
   lastTurn: boolean;
   owner?: User
   opponent?: User
@@ -41,6 +45,7 @@ const initialBoard: Board = [
   ["P", "P", "P", "P", "P", "P", "P", "P"].map((c, i) => "W" + c + (i + 1)),
   ["RL", "NL", "BL", "Q0", "K0", "BR", "NR", "RR"].map(c => "W" + c)
 ]
+
 const rooms: { [room_id: string]: Room } = {}
 
 const socketPaths = new Map<WebSocket, string>()
@@ -67,20 +72,6 @@ const rotateBoard180deg = (board: Board) => {
 //   }
 //   return obj
 // }
-
-const copyArray = (arr: any[], level: number) => {
-  if (level < 1)
-    return arr
-  try {
-    const newArr = [...arr]
-    for (let i in newArr) {
-      newArr[i] = copyArray(newArr[i], level - 1)
-    }
-    return newArr
-  } catch (e) {
-  }
-  return arr
-}
 
 export interface PiecesMoves {
   [piece: string]: {
@@ -134,6 +125,30 @@ const pieceMoves: PiecesMoves = {
     ],
     type: 3
   }
+}
+
+export const writeFile = (path: string, data: string) => {
+  fsExtra.mkdirsSync(nodePath.dirname(path))
+  fs.writeFileSync(path, data)
+}
+
+export const appendFile = (path: string, data: string) => {
+  fsExtra.mkdirsSync(nodePath.dirname(path))
+  fs.appendFileSync(path, data)
+}
+
+const copyArray = (arr: any[], level: number) => {
+  if (level < 1)
+    return arr
+  try {
+    const newArr = [...arr]
+    for (let i in newArr) {
+      newArr[i] = copyArray(newArr[i], level - 1)
+    }
+    return newArr
+  } catch (e) {
+  }
+  return arr
 }
 
 const validMove = (board: Board, move: Move, moveByOwner: boolean) => {
@@ -286,15 +301,57 @@ const moveSafely = (board: Board, move: Move) => {
   board[move.from.x][move.from.y] = ''
 }
 
-const roomBroadcast = (room: Room, data: any) => {
+const sendAndSaveRoom = (room: Room, board: Board) => {
+  room?.opponent?.socket.send(JSON.stringify({
+    type: KEYWORDS.BOARD,
+    board: rotateBoard180deg(board)
+  }))
+  const data = JSON.stringify({
+    type: KEYWORDS.BOARD,
+    board: board
+  })
   room?.owner?.socket.send(data)
-  room?.opponent?.socket.send(data)
   for (let viewer of room.viewers) {
     viewer?.socket.send(data)
   }
+  const roomJson = JSON.stringify({
+    ...room,
+    owner: {
+      ...room.owner,
+      socket: null
+    },
+    opponent: {
+      ...room.opponent,
+      socket: null
+    },
+    viewers: []
+  }, null, 2)
+  writeFile(`./data${room.path}.json`, roomJson)
+}
+const getRoom = (path: string): Room => {
+  const roomPath = `./data${path}.json`
+  if (fs.existsSync(roomPath))
+    try {
+      return JSON.parse(fs.readFileSync(roomPath, 'utf8'))
+    } catch (e) {
+    }
+  return {
+    path,
+    board: copyArray(initialBoard, 2),
+    lastTurn: false,
+    viewers: []
+  }
 }
 
-function messageHandler(event: WebSocket.MessageEvent) {
+const roomBroadcast = (room: Room, data: any) => {
+  room?.owner?.socket?.send(data)
+  room?.opponent?.socket?.send(data)
+  for (let viewer of room.viewers) {
+    viewer?.socket?.send(data)
+  }
+}
+
+const messageHandler = (event: WebSocket.MessageEvent) => {
   const socket = event.target
   let data: any = {
     type: KEYWORDS.ERROR,
@@ -330,19 +387,7 @@ function messageHandler(event: WebSocket.MessageEvent) {
           move.to.y = 7 - move.to.y
         }
         moveSafely(board, move)
-        // broadcast to the room
-        room?.opponent?.socket.send(JSON.stringify({
-          type: KEYWORDS.BOARD,
-          board: rotateBoard180deg(board)
-        }))
-        const data = JSON.stringify({
-          type: KEYWORDS.BOARD,
-          board: board
-        })
-        room?.owner?.socket.send(data)
-        for (let viewer of room.viewers) {
-          viewer?.socket.send(data)
-        }
+        sendAndSaveRoom(room, board)
       }
       break;
     }
@@ -365,26 +410,26 @@ function messageHandler(event: WebSocket.MessageEvent) {
       }
       const room = rooms[socketPaths.get(socket) || "<default>"]
 
-      if (!room.owner) {
+      if (!room.owner?.id) {
         room.owner = {
           socket,
           id: userID,
           name: userName
         }
       } else if (room.owner.id === userID) {
-        room.owner.socket.send(JSON.stringify({
+        room.owner.socket?.send(JSON.stringify({
           type: KEYWORDS.STATUS,
           status: KEYWORDS.CLOSED
         }))
         room.owner.socket = socket
-      } else if (!room.opponent) {
+      } else if (!room.opponent?.id) {
         room.opponent = {
           socket,
           id: userID,
           name: userName
         }
       } else if (room.opponent.id === userID) {
-        room.opponent.socket.send(JSON.stringify({
+        room.opponent.socket?.send(JSON.stringify({
           type: KEYWORDS.STATUS,
           status: KEYWORDS.CLOSED
         }))
@@ -409,16 +454,12 @@ function messageHandler(event: WebSocket.MessageEvent) {
   }
 }
 
-function index(socket: WebSocket, req: Request) {
+const index = (socket: WebSocket, req: Request) => {
   let path = req.params[0]
   socketPaths.set(socket, path)
-  if (!rooms[path]) {
-    rooms[path] = {
-      board: copyArray(initialBoard, 2),
-      lastTurn: false,
-      viewers: []
-    }
-  }
+  if (!rooms[path])
+    rooms[path] = getRoom(path)
+
   socket.send(JSON.stringify({
     type: KEYWORDS.STATUS,
     status: "connected"

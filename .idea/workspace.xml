@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8415e34f-1314-4d77-9f6f-63ba398ba95d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodemon.json" beforeDir="false" afterPath="$PROJECT_DIR$/nodemon.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socket/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/socket/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/404Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/404Page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/home/NamePopUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home/NamePopUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/room/PlayGround.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/room/PlayGround.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/room/context/RoomContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/room/context/RoomContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,22 +34,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/ayan/projects/fullstack/chess/@types/websocket&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/ayan/projects/fullstack/chess/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/ayan/projects/fullstack/chess/@types/websocket",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "ts.external.directory.path": "/home/ayan/projects/fullstack/chess/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/@types/websocket" />
@@ -118,7 +118,8 @@
       <workItem from="1660144148721" duration="47000" />
       <workItem from="1660144204273" duration="579000" />
       <workItem from="1660145411448" duration="5366000" />
-      <workItem from="1660189872965" duration="1336000" />
+      <workItem from="1660189872965" duration="3742000" />
+      <workItem from="1660195635885" duration="8522000" />
     </task>
     <servers />
   </component>
